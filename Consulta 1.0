@@ -1,0 +1,101 @@
+#!/usr/bin/python3
+import socket
+import requests
+import urllib.request
+import urllib.parse
+import urllib.error
+
+# Códigos ANSI para cores
+class Colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+1 - Verificar o BANNER do site.
+2 - Verificar o IP de um site.
+3 - Verificar se o SITE existe.{Colors.ENDC}
+\n{Colors.OKBLUE}Resposta: {Colors.ENDC}""")
+
+# Verifica a opção escolhida pelo usuário
+if opcao == "1":
+    ip = input(f"\n{Colors.YELLOW}Digite o IP: {Colors.ENDC}")
+    porta = int(input(f"{Colors.YELLOW}Digite a porta: {Colors.ENDC}"))
+
+    # Cria um socket, conecta-se ao IP e porta especificados e recebe o banner
+    meu_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    meu_socket.connect((ip, porta))
+    banner = meu_socket.recv(1024)
+
+    # Exibe o banner recebido
+    print(f"\n{Colors.OKGREEN}O Banner é: {banner.decode()}{Colors.ENDC}")
+
+elif opcao == "2":
+    dns = input(f"\n{Colors.YELLOW}Digite o HOST [S/HTTP]: {Colors.ENDC}")
+    # Obtém e exibe o endereço IP associado ao host
+    print(f"{dns} ----> {Colors.OKGREEN}{socket.gethostbyname(dns)}{Colors.ENDC}")
+
+elif opcao == "3":
+    site = input(f"\n{Colors.YELLOW}Digite o SITE  [C/HTTP]: {Colors.ENDC}")
+    # Realiza uma requisição HTTP para verificar a existência do site
+    verificando = requests.get(site)
+    status = verificando.status_code
+
+    # Obtém informações do servidor do site
+    verificandoo = urllib.request.urlopen(site)
+    server = verificandoo.info()
+
+# Verifica o código de status e exibe informações do servidor, se existir
+    if status == 200:
+        print(f"\n{Colors.OKGREEN}Página Existente, rodando: {server['Server']}{Colors.ENDC}")
+    else:
+        print(f"\n{Colors.FAIL}Página Inexistente{Colors.ENDC}")
+
+else:
+    print(f"{Colors.FAIL}ERROR{Colors.ENDC}")
+    YELLOW = '\033[93m'
+    GREEN = '\033[92m'
+# Solicita ao usuário que escolha uma opção
+opcao = input(f"""
+{Colors.HEADER}1 - Verificar o BANNER do site.
+2 - Verificar o IP de um site.
+3 - Verificar se o SITE existe.{Colors.ENDC}
+\n{Colors.OKBLUE}Resposta: {Colors.ENDC}""")
+
+# Verifica a opção escolhida pelo usuário
+if opcao == "1":
+    ip = input(f"\n{Colors.YELLOW}Digite o IP: {Colors.ENDC}")
+    porta = int(input(f"{Colors.YELLOW}Digite a porta: {Colors.ENDC}"))
+
+    # Cria um socket, conecta-se ao IP e porta especificados e recebe o banner
+    meu_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    meu_socket.connect((ip, porta))
+    banner = meu_socket.recv(1024)
+
+    # Exibe o banner recebido
+    print(f"\n{Colors.OKGREEN}O Banner é: {banner.decode()}{Colors.ENDC}")
+
+elif opcao == "2":
+    dns = input(f"\n{Colors.YELLOW}Digite o HOST [S/HTTP]: {Colors.ENDC}")
+    # Obtém e exibe o endereço IP associado ao host
+    print(f"{dns} ----> {Colors.OKGREEN}{socket.gethostbyname(dns)}{Colors.ENDC}")
+
+elif opcao == "3":
+    site = input(f"\n{Colors.YELLOW}Digite o SITE  [C/HTTP]: {Colors.ENDC}")
+  # Realiza uma requisição HTTP para verificar a existência do site
+    verificando = requests.get(site)
+    status = verificando.status_code
+
+    # Obtém informações do servidor do site
+    verificandoo = urllib.request.urlopen(site)
+    server = verificandoo.info()
+
+    # Verifica o código de status e exibe informações do servidor, se existir
+    if status == 200:
+        print(f"\n{Colors.OKGREEN}Página Existente, rodando: {server['Server']}{Colors.ENDC}")
+    else:
+        print(f"\n{Colors.FAIL}Página Inexistente{Colors.ENDC}")
+
+else:
+    print(f"{Colors.FAIL}ERROR{Colors.ENDC}")
