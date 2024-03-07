@@ -45,3 +45,5 @@ O script utiliza códigos ANSI para cores no terminal, proporcionando uma experi
 ## Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas ou enviar solicitações de pull.
+
+## Keep Working 🏆
